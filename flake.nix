@@ -16,9 +16,13 @@
             url = "https://github.com/nemequ/munit/archive/refs/tags/v${finalAttrs.version}.tar.gz";
             hash = "sha256-WMEvKuCKz8Jw1Hpf8jOAwwCyTX3FPzoj9FJ+ARIUaEQ=";
           };
+          buildPhase = ''
+            mkdir -p $out
+            $CC -c -o $out/munit.o munit.c
+          '';
           installPhase = ''
             mkdir -p $out/include
-            cp munit.h munit.c $out/include
+            cp munit.h $out/include
           '';
         });
         formatter = pkgs.nixpkgs-fmt;
